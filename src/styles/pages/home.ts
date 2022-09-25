@@ -12,6 +12,7 @@ export const HomeContainer = styled("main", {
 export const Product = styled("a", {
   cursor: "pointer",
   background: "linear-gradient(180deg, #1ea483 0%, #7465d4 100%)",
+  borderRadius: 8,
   padding: "0.25rem",
   position: "relative",
   overflow: "hidden",
@@ -36,5 +37,26 @@ export const Product = styled("a", {
 
     display: "flex",
     justifyContent: "space-between",
+
+    transform: "translateY(110%)",
+    opacity: 0,
+    transition: "all 0.4s ease-in-out",
+
+    strong: {
+      fontSize: "$lg",
+    },
+
+    span: {
+      fontSize: "$xl",
+      fontWeight: "bold",
+      color: "$green300",
+    },
+  },
+
+  "&:hover": {
+    footer: {
+      transform: "translateY(0%)",
+      opacity: 1,
+    },
   },
 });
