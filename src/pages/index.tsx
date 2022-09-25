@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <HomeContainer>
       <Product>
-        <Image src={shirt01} alt='' />
+        <Image src={shirt01} alt='' width={520} height={480} />
 
         <footer>
           <strong>CamisetaX</strong>
@@ -16,7 +16,7 @@ export default function Home() {
       </Product>
 
       <Product>
-        <Image src={shirt02} alt='' />
+        <Image src={shirt02} alt='' width={520} height={480} />
 
         <footer>
           <strong>CamisetaX</strong>
