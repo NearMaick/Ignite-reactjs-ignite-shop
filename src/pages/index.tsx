@@ -40,12 +40,7 @@ export default function Home({ products }: HomeProps) {
 
           <footer>
             <strong>{product.name}</strong>
-            <span>
-              {Intl.NumberFormat("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-              }).format(product.price)}
-            </span>
+            <span>{product.price}</span>
           </footer>
         </Product>
       ))}
@@ -67,7 +62,10 @@ export const getStaticProps: GetStaticProps = async () => {
       id,
       name,
       imageUrl: images[0],
-      price: price.unit_amount! / 100,
+      price: Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      }).format(price.unit_amount! / 100),
     };
   });
 
