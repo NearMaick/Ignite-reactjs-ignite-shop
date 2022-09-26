@@ -15,16 +15,19 @@ interface ProductProps {
     imageUrl: string;
     price: string;
     description: string;
+    defaultPriceId: string;
   };
 }
 
 export default function Product({ product }: ProductProps) {
-  const { imageUrl, name, price, description } = product;
+  const { imageUrl, name, price, description, defaultPriceId } = product;
+
+  function handleBuyProduct() {}
 
   return (
     <ProductContainer>
       <ImageContainer>
-        <Image src={imageUrl} width={520} height={480} alt='' />
+        <Image src={imageUrl} width={520} height={480} alt='' priority />
       </ImageContainer>
       <ProductDetails>
         <h1>{name}</h1>
@@ -32,7 +35,7 @@ export default function Product({ product }: ProductProps) {
 
         <p>{description}</p>
 
-        <button>Comprar agora</button>
+        <button onClick={handleBuyProduct}>Comprar agora</button>
       </ProductDetails>
     </ProductContainer>
   );
@@ -69,6 +72,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
           style: "currency",
           currency: "BRL",
         }).format(price.unit_amount! / 100),
+        defaultPriceId: price.id,
       },
     },
     revalidate: oneHourRevalidate,
