@@ -38,7 +38,7 @@ export default function Product({ product }: ProductProps) {
       });
       const { checkoutSession } = await response.json();
 
-      console.log(checkoutSession);
+      window.location.href = checkoutSession;
     } catch (error) {
       setIsCreatingCheckoutSession(false);
       alert("Falha ao redirecionar ao checkout!");
