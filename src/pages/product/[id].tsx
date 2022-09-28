@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
+import { useState } from "react";
 import Stripe from "stripe";
 import { stripe } from "../../lib/stripe";
 import {
@@ -20,9 +21,29 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
+    useState(false);
   const { imageUrl, name, price, description, defaultPriceId } = product;
 
-  function handleBuyProduct() {}
+  async function handleBuyProduct() {
+    try {
+      setIsCreatingCheckoutSession(true);
+
+      const response = await fetch("http://localhost:3000/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ priceId: defaultPriceId }),
+      });
+      const { checkoutSession } = await response.json();
+
+      console.log(checkoutSession);
+    } catch (error) {
+      setIsCreatingCheckoutSession(false);
+      alert("Falha ao redirecionar ao checkout!");
+    }
+  }
 
   return (
     <ProductContainer>
@@ -35,7 +56,9 @@ export default function Product({ product }: ProductProps) {
 
         <p>{description}</p>
 
-        <button onClick={handleBuyProduct}>Comprar agora</button>
+        <button disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>
+          Comprar agora
+        </button>
       </ProductDetails>
     </ProductContainer>
   );
