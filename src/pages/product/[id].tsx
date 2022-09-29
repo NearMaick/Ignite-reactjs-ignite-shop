@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import Stripe from "stripe";
+import { SidebarCart } from "../../components/Sidebar";
 import { stripe } from "../../lib/stripe";
 import {
   ImageContainer,
@@ -67,6 +68,7 @@ export default function Product({ product }: ProductProps) {
             Comprar agora
           </button>
         </ProductDetails>
+        <SidebarCart />
       </ProductContainer>
     </>
   );
